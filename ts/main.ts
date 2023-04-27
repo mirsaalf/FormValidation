@@ -5,9 +5,27 @@ window.onload = function() {
 }
 
 function main():void {
+    resetErrorMessages();
     isTextPresent("first-name", "First Name is required!");
     isTextPresent("last-name", "Last Name is required!");
 }
+
+/**
+ * Resets all the spans back to the default text
+ */
+function resetErrorMessages():void {
+    let allSpans = document.querySelectorAll("form span");
+    for (let i = 0; i < allSpans.length; i++) {
+        let currSpan = <HTMLElement>allSpans[i];
+        if (currSpan.hasAttribute("data-required")) {
+            currSpan.innerText = "*";
+        }
+        else {
+            currSpan.innerText = "";
+        }
+    }
+}
+
 /**
  * Returns true if the text box with the given id has some text inside
  * @param id The id of the <input type="text"> to validate
